@@ -9,9 +9,7 @@ const nextConfig = {
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(glb|gltf)$/,
-      use: {
-        loader: 'file-loader',
-      },
+      type: 'asset/resource',
     });
     return config;
   },
