@@ -51,10 +51,10 @@ function ModelPreview({ index }: { index: number }) {
 
   // Different geometry for each model preview
   const geometries = [
-    <boxGeometry args={[1.5, 1.5, 1.5]} />,
-    <sphereGeometry args={[1, 32, 32]} />,
-    <torusGeometry args={[0.8, 0.4, 16, 100]} />,
-    <octahedronGeometry args={[1.2]} />,
+    <boxGeometry key="box" args={[1.5, 1.5, 1.5]} />,
+    <sphereGeometry key="sphere" args={[1, 32, 32]} />,
+    <torusGeometry key="torus" args={[0.8, 0.4, 16, 100]} />,
+    <octahedronGeometry key="octahedron" args={[1.2]} />,
   ]
 
   return (
