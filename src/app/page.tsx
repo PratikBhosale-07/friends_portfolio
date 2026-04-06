@@ -15,9 +15,6 @@ const AnimationShowcase = dynamic(() => import('@/components/sections/AnimationS
 const IllustrationGallery = dynamic(() => import('@/components/sections/IllustrationGallery'), {
   loading: () => <div className="min-h-screen bg-charcoal-900" />,
 })
-const OlundesSection = dynamic(() => import('@/components/sections/OlundesSection'), {
-  loading: () => <div className="min-h-screen bg-charcoal-950" />,
-})
 const Contact = dynamic(() => import('@/components/sections/Contact'), {
   loading: () => <div className="min-h-screen bg-charcoal-900" />,
 })
@@ -34,7 +31,6 @@ export default function Home() {
         <ModelsShowcase />
         <AnimationShowcase />
         <IllustrationGallery />
-        <OlundesSection />
         <Contact />
       </main>
     </>

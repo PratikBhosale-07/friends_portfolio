@@ -43,7 +43,7 @@ const animations = [
     title: 'Swing Animation',
     description: 'Character movement study',
     thumbnail: '/animations/swing-final-1.gif',
-    type: 'video' as const,
+    type: 'image' as const,
   },
   {
     id: 6,
@@ -54,9 +54,16 @@ const animations = [
   },
 ]
 
-function AnimationCard({ animation, index }: { animation: any; index: number }) {
+type AnimationItem = {
+  id: number
+  title: string
+  description: string
+  thumbnail: string
+  type: 'video' | 'image'
+}
+
+function AnimationCard({ animation, index }: { animation: AnimationItem; index: number }) {
   const [isHovered, setIsHovered] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const { ref, inView } = useInView({
     threshold: 0.5,
@@ -64,14 +71,18 @@ function AnimationCard({ animation, index }: { animation: any; index: number }) 
   })
 
   useEffect(() => {
+    if (animation.type !== 'video') {
+      return
+    }
+
     if (inView && videoRef.current) {
-      videoRef.current.play()
-      setIsPlaying(true)
+      videoRef.current.play().catch(() => {
+        // Ignore autoplay rejections on restrictive browsers.
+      })
     } else if (videoRef.current) {
       videoRef.current.pause()
-      setIsPlaying(false)
     }
-  }, [inView])
+  }, [animation.type, inView])
 
   return (
     <motion.div
@@ -85,16 +96,24 @@ function AnimationCard({ animation, index }: { animation: any; index: number }) 
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="aspect-video bg-charcoal-900 rounded-xl overflow-hidden relative">
-        {/* Actual animation video */}
-        <video
-          ref={videoRef}
-          src={animation.thumbnail}
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-          preload="metadata"
-        />
+        {animation.type === 'video' ? (
+          <video
+            ref={videoRef}
+            src={animation.thumbnail}
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            preload="metadata"
+          />
+        ) : (
+          <img
+            src={animation.thumbnail}
+            alt={animation.title}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        )}
 
         {/* Hover overlay */}
         <motion.div

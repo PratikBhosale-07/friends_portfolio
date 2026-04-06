@@ -9,14 +9,12 @@ gsap.registerPlugin(ScrollTrigger)
 
 const socialLinks = [
   { name: 'Instagram', url: 'https://instagram.com', icon: 'IG' },
-  { name: 'Behance', url: 'https://behance.net', icon: 'BE' },
   { name: 'LinkedIn', url: 'https://linkedin.com', icon: 'LI' },
   { name: 'Twitter', url: 'https://twitter.com', icon: 'TW' },
 ]
 
 const contactInfo = [
   { label: 'Email', value: 'rishabbharadwaj850@gmail.com', link: 'mailto:rishabbharadwaj850@gmail.com' },
-  { label: 'Location', value: 'Global', link: null },
 ]
 
 export default function Contact() {
